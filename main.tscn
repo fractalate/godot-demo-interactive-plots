@@ -1,0 +1,95 @@
+[gd_scene load_steps=14 format=3 uid="uid://dm76ymjgp8i33"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_dq32w"]
+[ext_resource type="Texture2D" uid="uid://dm65rmqhrgu7u" path="res://spotlight_grey_1920x1080.png" id="2_6ubaj"]
+[ext_resource type="Script" path="res://Player.gd" id="3_s8jaq"]
+[ext_resource type="Texture2D" uid="uid://be44i3u7ugb1d" path="res://01-Neutral.png" id="4_a081t"]
+[ext_resource type="Script" path="res://ControlBox.gd" id="5_uvvwc"]
+[ext_resource type="Texture2D" uid="uid://8wwxhoedomwm" path="res://Block Gold.png" id="6_a5omf"]
+[ext_resource type="Texture2D" uid="uid://b07woc3bfegbb" path="res://curtains_drawn_red_1920x1080.png" id="7_2xu63"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5lp53"]
+size = Vector2(1176, 126)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ogmtd"]
+size = Vector2(75, 338)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_52l8t"]
+size = Vector2(97, 307)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6fvmj"]
+size = Vector2(39.5, 85)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oo7sh"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m46ud"]
+size = Vector2(64, 20)
+
+[node name="Demo03StageAndGraphs" type="Node2D"]
+script = ExtResource("1_dq32w")
+
+[node name="Spotlight" type="TextureRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("2_6ubaj")
+expand_mode = 1
+
+[node name="StageBoundary" type="StaticBody2D" parent="."]
+
+[node name="Floor" type="CollisionShape2D" parent="StageBoundary"]
+position = Vector2(578, 595)
+shape = SubResource("RectangleShape2D_5lp53")
+
+[node name="StageLeft" type="CollisionShape2D" parent="StageBoundary"]
+position = Vector2(-32, 376)
+shape = SubResource("RectangleShape2D_ogmtd")
+
+[node name="StageRight" type="CollisionShape2D" parent="StageBoundary"]
+position = Vector2(1208, 388)
+shape = SubResource("RectangleShape2D_52l8t")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(271, 483)
+collision_layer = 3
+script = ExtResource("3_s8jaq")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+texture_filter = 1
+position = Vector2(0, 1.90735e-06)
+scale = Vector2(1.625, 1.57812)
+texture = ExtResource("4_a081t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(-0.25, 6)
+shape = SubResource("RectangleShape2D_6fvmj")
+
+[node name="ControlBox" type="StaticBody2D" parent="."]
+position = Vector2(240, 365)
+script = ExtResource("5_uvvwc")
+
+[node name="Sprite2D" type="Sprite2D" parent="ControlBox"]
+texture = ExtResource("6_a5omf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ControlBox"]
+shape = SubResource("RectangleShape2D_oo7sh")
+
+[node name="HitBox" type="Area2D" parent="ControlBox"]
+position = Vector2(0, 23)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ControlBox/HitBox"]
+shape = SubResource("RectangleShape2D_m46ud")
+
+[node name="Curtains" type="TextureRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("7_2xu63")
+expand_mode = 1
+
+[node name="DebugText" type="RichTextLabel" parent="."]
+offset_left = 226.0
+offset_top = 300.0
+offset_right = 272.0
+offset_bottom = 334.0
